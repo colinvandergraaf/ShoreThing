@@ -15,6 +15,7 @@ const Sidebar = (props) => {
     Drizzle: '../assets/drizzle.svg',
     Snow: '../assets/snowflake.svg',
     Haze: '../assets/foggy.svg',
+    Mist: '../assets/mist.svg'
   };
   const colorMap = {
     GREEN: '#009966',

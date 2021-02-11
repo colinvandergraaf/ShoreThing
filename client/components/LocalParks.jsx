@@ -28,7 +28,7 @@ const LocalParks = (props) => {
         cardHolder.push(<LocalParkCard parkId={nearbyBeaches[i].ID} key={nearbyBeaches[i].ID} localBtnHandler={localBtnHandler}/>)
       }
       setLocalBeaches(cardHolder);
-    }, 500)
+    }, 2000)
   }, [props.location]);
   
   const localBtnHandler = (id) => {

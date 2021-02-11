@@ -1,5 +1,8 @@
 import React, {useState} from 'react';
-import {Link, useHistory} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom';
+import { GoogleLogin } from 'react-google-login';
+import config from '../../config'
+
 
 
 const Login = () => {
@@ -33,6 +36,11 @@ const Login = () => {
         .catch(err => console.error(err));
       };
     };
+    /// Google Auth Handler
+    const responseGoogle = (response) => {
+      sessionStorage.setItem('username', response.profileObj.givenName)
+      history.push('/landing');
+    }
 
   return (
     <div className="login-page">
@@ -51,6 +59,13 @@ const Login = () => {
         <div className="signup-link">
           <Link to='/signup'><small>Need an account? Sign up</small></Link>
         </div>	
+        <GoogleLogin 
+          clientId={config.googleAPI}
+          buttonText="Login"
+          onSuccess={responseGoogle}
+          onFailure={responseGoogle}
+          cookiePolicy={'single_host_origin'}
+        />
         <button type="button" className="btn btn-primary" onClick={() => onClickHandler()}>Submit</button>
       </form>
     </div>

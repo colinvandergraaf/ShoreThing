@@ -143,10 +143,10 @@ body {
   margin-right: 2.3em;
 }
 
-/* .card-button-container {
+.card-button-container {
   display: flex;
-  justify-self: last baseline;
-} */
+  justify-content: center;
+}
 
 #changeZip {
   display: flex;
