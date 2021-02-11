@@ -66,7 +66,7 @@ const Login = () => {
           onFailure={responseGoogle}
           cookiePolicy={'single_host_origin'}
         />
-        <button type="button" className="btn btn-primary" onClick={() => onClickHandler()}>Submit</button>
+        <button type="button" style={{marginLeft: '1em'}} className="btn btn-primary" onClick={() => onClickHandler()}>Submit</button>
       </form>
     </div>
   )

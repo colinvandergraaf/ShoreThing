@@ -1,3 +1,14 @@
+// $colorMap: (
+//   GREEN: '#009966',
+//   YELLOW: '#ffde33',
+//   ORANGE: '#ff9933',
+//   RED: '#cc0033',
+//   PURPLE: '#660099',
+//   MAHOGANY: '#7e0023'
+// );
+
+// $hoverBackground
+
 .login-page {
   background-color: sandybrown;
 }
@@ -81,7 +92,7 @@ body {
 .card-set {
   display: flex;
   margin-left: 1vw;
-  margin-top: 1vw;
+  margin-top: .1vw;
 }
 
 .card-holder-label {
@@ -154,7 +165,7 @@ body {
 }
 
 .card:hover {
-  /* background-color: green; */
+  // background-color: var(--color);
   box-shadow: 1px 1px 5px black;
 }
 

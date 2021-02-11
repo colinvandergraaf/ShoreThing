@@ -6,7 +6,7 @@ const LocalParkCard = (props) => { // props will include id from DB correspondin
   const [imgUrl, setImgUrl] = useState('');
   const [weather, setWeather] = useState({});
   const [AQI, setAQI] = useState('');
-  const [numVisits, setNumVisits] = ('');
+  const [aqiColor, setAqiColor] = useState('');
   
   const weatherMap = {
     Clouds: '../assets/cloud.svg',
@@ -17,6 +17,15 @@ const LocalParkCard = (props) => { // props will include id from DB correspondin
     Haze: '../assets/foggy.svg',
     Mist: '../assets/mist.svg'
   };
+
+  const colorMap = {
+    GREEN: '#009966',
+    YELLOW: '#ffde33',
+    ORANGE: '#ff9933',
+    RED: '#cc0033',
+    PURPLE: '#660099',
+    MAHOGANY: '#7e0023'
+  }
   
   // , temperature: Math.floor((main.temp + 273.15) * (9/5) + 32)
   useEffect(() => {
@@ -34,12 +43,34 @@ const LocalParkCard = (props) => { // props will include id from DB correspondin
       // fetch to AQI api
       fetch(`https://api.waqi.info/feed/geo:${currentBeach.LATITUDE};${currentBeach.LONGITUDE}/?token=${config.aqiAPI}`)
       .then((res) => res.json())
-      .then(({data}) => setAQI(data.aqi))
+      .then(({data}) => {
+        setAQI(data.aqi)
+        if (data.aqi >= 0 && data.aqi <= 50){
+          setAqiColor(colorMap.GREEN);
+        }
+        else if (data.aqi >= 51 && data.aqi <= 100){
+          setAqiColor(colorMap.YELLOW);
+        }
+        else if (data.aqi >= 101 && data.aqi <= 150){
+          setAqiColor(colorMap.ORANGE);
+        }
+        else if (data.aqi >= 151 && data.aqi <= 200){
+          setAqiColor(colorMap.RED);
+        }
+        else if (data.aqi >= 201 && data.aqi <= 300){
+          setAqiColor(colorMap.PURPLE);
+        }
+        else if (data.aqi >= 301 ){
+          setAqiColor(colorMap.MAHOGANY);
+        }
+      })
       .catch(err => {throw new Error(err)});
   }, []);
 
   return (
-  <div className='card' id="beachCard" style={{width: '9rem', minWidth: "19rem"}}>
+  <div className='card'
+    id="beachCard" 
+    style={{width: '9rem', minWidth: "19rem"}}>
     <div>
     {imgUrl.length > 0 ?
     <img src={imgUrl} id="card-top-image" className="card-img-top" style={{width: '75%'}} /> 
@@ -54,8 +85,8 @@ const LocalParkCard = (props) => { // props will include id from DB correspondin
         <p className='card-text'>{weather.weather}</p>
         <p className='card-text'>Temp: {weather.temp} °F</p>
       </div>
-      <div className ="aqi-info">
-        <p className='card-text'>AQI: {AQI}</p>
+      <div className ="aqi-info" style={{backgroundColor: aqiColor, padding: '1em', borderRadius: '5px'}}>
+        <p className='card-text' style={{fontWeight: 'bold'}}>AQI: {AQI}</p>
       </div>
       </div>
       <div className="card-button-container">
