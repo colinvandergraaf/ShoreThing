@@ -16,6 +16,6 @@ CREATE TABLE Interested (
 CREATE TABLE Visited (
   vis_id SERIAL PRIMARY KEY,
   user_id INT NOT NULL,
-  trail_id VARCHAR NOT NULL,
+  trail_id INT NOT NULL,
   visits INT DEFAULT 0
 );

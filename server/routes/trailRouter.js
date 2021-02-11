@@ -11,7 +11,7 @@ router.get('/interested/:user_id', trailController.getInterests, (req, res) => {
 //   res.status(200).json(res.locals.trailInts);
 // });
 
-router.post('/interested', trailController.postInterest, (req, res) => {
+router.post('/interested', trailController.postInterest, trailController.postVisit, (req, res) => {
   console.log('trail router interest posted')
   res.status(200).json(res.locals.trailInts);
 });

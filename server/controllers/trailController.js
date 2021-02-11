@@ -22,10 +22,10 @@ module.exports = {
 
   //add an interested trail
   postInterest: function (req, res, next) {
-    const { user_id, parkId } = req.body;
+    const { user_id, trail_id } = req.body;
+    console.log('postinterestreq.body', req.body )
     const text = `INSERT INTO Interested (user_id, trail_id) VALUES ($1, $2) RETURNING *`;
-    console.log(user_id)
-    db.query(text, [user_id, parkId])
+    db.query(text, [user_id, trail_id])
       .then(trailInts => {
         console.log('Interested trails:',trailInts);
         res.locals.trailInts = trailInts.rows;
@@ -54,10 +54,11 @@ module.exports = {
 
   //add a visited trail
   postVisit: function (req, res, next) {
-    const { user_id, trail_url } = req.body;
-    const text = `INSERT INTO Visited (user_id, trail_url) VALUES ($1, $2) RETURNING *`;
+    const { user_id, trail_id } = req.body;
+    console.log('postvisit.body', req.body )
+    const text = `INSERT INTO Visited (user_id, trail_id) VALUES ($1, $2) RETURNING *`;
 
-    db.query(text, [user_id, trail_url])
+    db.query(text, [user_id, trail_id])
       .then(trailVisits => {
         console.log('Visited trails:', trailVisits);
         res.locals.trailVisits = trailVisits.rows;

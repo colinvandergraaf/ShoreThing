@@ -19,11 +19,6 @@ const LocalParkCard = (props) => { // props will include id from DB correspondin
   
   // , temperature: Math.floor((main.temp + 273.15) * (9/5) + 32)
   useEffect(() => {
-    // fetch number of visits
-    fetch(`/trails/visited/:${sessionStorage.getItem('user_id')}`)
-      .then((data) => data.json())
-      .then((result) => setNumVisits(result))
-      .catch((err) => {throw new Error(err)});
     // fetch to beach api
     const currentBeach = JSON.parse(localStorage.getItem('beaches')).find((beach) => beach.ID === props.parkId);
     console.log(currentBeach)
@@ -47,19 +42,6 @@ const LocalParkCard = (props) => { // props will include id from DB correspondin
       .catch(err => {throw new Error(err)});
   }, []);
 
-  const onClickHandler = () => {
-    // first, confirm visit
-    const visited = confirm('Another visit to this beach?');
-    if (!visited) return;
-    fetch('/trails/visited', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json; charset:utf-8'},
-      body: JSON.stringify({visits: numVisits + 1, park_id: props.parkId, username: sessionStorage.getItem('username')}),
-    })
-    .then(() => setNumVisits(numVisits + 1))
-    .catch(err => {throw new Error(err)});
-  }
-
   return (
   <div className='card' id="beachCard" style={{minWidth: "19rem"}}>
     <div>
@@ -81,7 +63,6 @@ const LocalParkCard = (props) => { // props will include id from DB correspondin
       </div>
       </div>
       <div className="card-button-container">
-        <button className="btn btn-primary" style={{marginRight: '1em'}} onClick={() => onClickHandler()}>Visited {numVisits || 0} times!</button>
         <button className="btn btn-secondary" onClick={() => props.localBtnHandler(props.parkId)}>Favorite?</button>
       </div>
     </div>   
