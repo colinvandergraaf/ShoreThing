@@ -37,6 +37,13 @@ const LocalParks = (props) => {
     })
       .then(() => {
         // fetch table to reset state to rerender here
+        // fetch(`/trails/interested/${sessionStorage.getItem('user_id')}`)
+        // .then((favorites) => favorites.json())
+        // .then((data) => {
+        //   console.log('what is data', data)
+        //   setFavBeaches(data)
+        // })
+        // .catch((err) => {throw new Error(err)});
       }) 
   }
 

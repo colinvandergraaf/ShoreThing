@@ -16,7 +16,9 @@ router.post('/interested', trailController.postInterest, trailController.postVis
   res.status(200).json(res.locals.trailInts);
 });
 
-//router delete /interested
+router.delete('/interested/:user_id/:trail_id', trailController.deleteInterest, trailController.deleteVisit, (req, res) => {
+  res.status(200).json(res.locals.trailInts)
+})
 
 router.get('/visited/:user_id/:trail_id', trailController.getVisits, (req, res) => {
   res.status(200).json(res.locals.trailVisits)

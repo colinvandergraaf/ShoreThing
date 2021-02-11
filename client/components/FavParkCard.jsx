@@ -123,7 +123,7 @@ const FavParkCard = (props) => { // props will include id from DB corresponding 
       </div>
       <div className="card-button-container" key={'btnbtnprim'}>
         <button className="btn btn-primary" style={{marginRight: '1em'}} onClick = {() => onClickHandler()}> Visited {numVisits} times!</button>
-        <button className="btn btn-success" onClick={() => props.favoriteBtnHandler(props.parkId)}>Favorite</button>
+        <button className="btn btn-success" onClick={() => props.favoriteBtnHandler(props.parkId)}>Remove</button>
       </div>
     </div>   
   </div>

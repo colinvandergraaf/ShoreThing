@@ -17,13 +17,21 @@ const FavoritedParks = () => {
   }, []);
   
   const favoriteBtnHandler = (id) => {
-    fetch('/trails/interested', {
+    console.log('remove button clicked', id);
+    fetch(`/trails/interested/${sessionStorage.getItem('user_id')}/${id}`, {
       method: 'DELETE',
       headers: {'Content-Type': 'application/json; charset=UTF-8'},
-      body: JSON.stringify({username: sessionStorage.getItem('username'), parkId: id})
+      body: JSON.stringify({user_id: sessionStorage.getItem('user_id'), trail_id: id})
     })
       .then(() => {
         // fetch table to reset state to rerender here
+        fetch(`/trails/interested/${sessionStorage.getItem('user_id')}`)
+        .then((favorites) => favorites.json())
+        .then((data) => {
+          console.log('what is data', data)
+          setFavBeaches(data)
+        })
+        .catch((err) => {throw new Error(err)});
       }) 
   };
   
